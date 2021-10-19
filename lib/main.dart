@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:recipe_book_app/ui/routes/my_recipes_page.dart';
 
 void main() {
   runApp(CookBookApp());
@@ -13,10 +14,10 @@ class CookBookApp extends StatelessWidget {
       home: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.add_circled),
-                activeIcon: Icon(CupertinoIcons.add_circled_solid),
-                label: "Add Recipe"),
+            // BottomNavigationBarItem(
+            //     icon: Icon(CupertinoIcons.add_circled),
+            //     activeIcon: Icon(CupertinoIcons.add_circled_solid),
+            //     label: "Add Recipe"),
             BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.bookmark),
                 activeIcon: Icon(CupertinoIcons.bookmark_fill),
@@ -29,8 +30,21 @@ class CookBookApp extends StatelessWidget {
         ),
         tabBuilder: (BuildContext context, int index) {
           return CupertinoTabView(
+            routes: {
+              MyRecipesPage.routeName: (_) => MyRecipesPage(),
+            },
             builder: (BuildContext context) {
-              return Container();
+              switch (index) {
+                case 0:
+                  return CupertinoTabView(
+                    builder: (context) {
+                      return MyRecipesPage();
+                    },
+                  );
+                  break;
+                default:
+                  return Container();
+              }
             },
           );
         },
